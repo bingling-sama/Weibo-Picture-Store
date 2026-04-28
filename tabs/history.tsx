@@ -57,6 +57,10 @@ function History() {
     const [activeAlbumId, setActiveAlbumId] = useState(() => new URLSearchParams(location.search).get("album_id") || "");
 
     useEffect(() => {
+        document.title = chrome.i18n.getMessage("ext_name") || "微博图床";
+    }, []);
+
+    useEffect(() => {
         let cancelled = false;
 
         const load = async () => {

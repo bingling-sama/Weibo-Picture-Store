@@ -14,6 +14,7 @@ function Options() {
     const [httpRefererLocked, setHttpRefererLocked] = useState(false);
 
     useEffect(() => {
+        document.title = chrome.i18n.getMessage("ext_name") || "微博图床";
         void getSettings().then((settings) => {
             setAutoDisplayChangelog(settings.autoDisplayChangelog);
             setInheritWeiboWatermark(settings.inheritWeiboWatermark);

@@ -228,6 +228,7 @@ export function LegacyUploadApp() {
 
     useEffect(() => {
         void getSettings().then(setLocalSettings);
+        document.title = chrome.i18n.getMessage("ext_name") || "微博图床";
     }, []);
 
     useEffect(() => {
