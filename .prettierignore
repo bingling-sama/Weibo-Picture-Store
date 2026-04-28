@@ -1,8 +1,0 @@
-**/dist
-**/release
-**/coverage
-**/node_modules
-
-# ignore root configuration files
-*.json
-*.yml

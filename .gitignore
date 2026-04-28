@@ -6,8 +6,10 @@ node_modules
 dist
 web-ext-artifacts
 tmp
-
+.plasmo
+build
+**/*.js
+**/*.js.map
 npm-debug.log*
-
-src/**/*.js
-src/**/*.js.map
+.cursor
+AGENTS.md

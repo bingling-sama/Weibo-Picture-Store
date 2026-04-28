@@ -1,65 +1,71 @@
 {
-  "name": "weibo-picture-store",
-  "version": "6.0.3",
+  "name": "weibo-picture-store-plasmo",
   "private": true,
-  "description": "Web Extension",
+  "version": "0.1.0",
+  "description": "Fresh Plasmo rewrite of Weibo Picture Store",
   "packageManager": "pnpm@8.10.5",
   "scripts": {
-    "prepare": "node ./.husky/setup.js",
-    "husky:pre-commit": "lint-staged",
-    "husky:commit-msg": "commitlint --edit ${1}",
-    "test": "pnpm run tscheck && pnpm run build && pnpm run webext:lint",
-    "tscheck": "tsc --noEmit",
-    "watch": "tsc --watch",
-    "build": "tsc --sourceMap false",
-    "webext:lint": "pnpm run apply:manifest:firefox && web-ext lint",
-    "webext:run": "pnpm run apply:manifest:firefox && web-ext run",
-    "apply:manifest:firefox": "gulp apply:manifest:firefox",
-    "bundle:chrome": "rimraf dist/chrome && pnpm run build && gulp bundle:chrome",
-    "bundle:firefox": "rimraf dist/firefox && pnpm run build && gulp bundle:firefox",
-    "bundle:all": "rimraf dist && pnpm run build && gulp bundle:chrome && gulp bundle:firefox"
+    "dev": "plasmo dev",
+    "build": "plasmo build",
+    "package": "plasmo package",
+    "typecheck": "tsc --noEmit"
   },
-  "webExt": {
-    "sourceDir": "src/"
+  "manifest": {
+    "manifest_version": 3,
+    "name": "__MSG_ext_name__",
+    "default_locale": "zh_CN",
+    "description": "__MSG_ext_desc__",
+    "minimum_chrome_version": "110",
+    "commands": {
+      "_execute_action": {
+        "suggested_key": {
+          "default": "Alt+Shift+W"
+        }
+      },
+      "execute_pointer_events": {
+        "suggested_key": {
+          "default": "Alt+Shift+T"
+        },
+        "description": "置顶页面中的视频和图片"
+      }
+    },
+    "permissions": [
+      "clipboardWrite",
+      "contextMenus",
+      "declarativeNetRequestWithHostAccess",
+      "downloads",
+      "notifications",
+      "scripting",
+      "tabs",
+      "storage",
+      "windows"
+    ],
+    "host_permissions": [
+      "*://*.weibo.cn/*",
+      "*://*.weibo.com/*",
+      "*://*.sina.com.cn/*",
+      "*://*.sinaimg.cn/*"
+    ],
+    "optional_host_permissions": [
+      "*://*/*"
+    ],
+    "homepage_url": "https://github.com/Semibold/Weibo-Picture-Store",
+    "browser_specific_settings": {
+      "gecko": {
+        "id": "weibo-picture-store@ext.hub.moe",
+        "strict_min_version": "115.0"
+      }
+    }
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Semibold/Weibo-Picture-Store.git"
-  },
-  "author": "Aqours",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Semibold/Weibo-Picture-Store/issues"
-  },
-  "homepage": "https://github.com/Semibold/Weibo-Picture-Store#readme",
-  "prettier": {
-    "singleQuote": false,
-    "trailingComma": "all"
-  },
-  "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+  "dependencies": {
+    "plasmo": "latest",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^18.4.3",
-    "@commitlint/config-conventional": "^18.4.3",
     "@types/chrome": "latest",
-    "@types/firefox-webext-browser": "^120.0.0",
-    "@types/gulp": "^4.0.6",
-    "@types/merge-stream": "^1.1.2",
-    "@types/node": "^20.9.3",
-    "chrome-webstore-upload-cli": "^2.2.2",
-    "ci-info": "^4.0.0",
-    "gulp": "^4.0.2",
-    "gulp-json-modify": "^1.0.2",
-    "gulp-rename": "^2.0.0",
-    "gulp-zip": "^5.0.1",
-    "husky": "^8.0.3",
-    "lint-staged": "^15.1.0",
-    "merge-stream": "^2.0.0",
-    "npm-check-updates": "^16.14.11",
-    "prettier": "^3.1.0",
-    "rimraf": "^5.0.5",
-    "typescript": "^5.3.2",
-    "web-ext": "^7.8.0"
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "typescript": "^5.3.2"
   }
 }
